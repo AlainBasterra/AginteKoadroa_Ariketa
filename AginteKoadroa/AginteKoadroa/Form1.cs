@@ -23,8 +23,8 @@ namespace AginteKoadroa
             using (var db = new SalmentaDbContext())
             {
                 var bezeroaData = db.Bezeroa //Bezeroa ipini behar da, ez izena.
-                .GroupBy(b => b.Izena)
-                .ToDictionary(g => g.Key, g => g.Count()); // SELECT Izena, COUNT(Izena)  FROM Bezeroa  GROUP BY Izena
+                .GroupBy(b => b.SaltzaileaId)
+                .ToDictionary(g => g.Key, g => g.Count()); // SELECT SaltzaileaId, COUNT(Izena)  FROM Bezeroa  GROUP BY Izena
                 if (bezeroaData != null)
                 {
                     if (bezeroaData.Count > 0)

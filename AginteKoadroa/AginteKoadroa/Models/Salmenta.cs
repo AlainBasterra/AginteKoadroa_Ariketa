@@ -9,7 +9,7 @@ namespace AginteKoadroa.Models
         public int Id { get; set; }
         public DateTime Data { get; set; }
         public decimal Zenbatekoa { get; set; }
-        public string NanBezeroa { get; set; }
+        public string BezeroaId { get; set; }
         public virtual Bezeroa Bezeroa { get; set; } // 1-1
     }
 }
