@@ -23,20 +23,20 @@ namespace AginteKoadroa
             using (var db = new SalmentaDbContext())
             {
                 var bezeroaData = db.Bezeroa //Bezeroa ipini behar da, ez izena.
-                .GroupBy(b => b.SaltzaileaId)
-                .ToDictionary(g => g.Key, g => g.Count()); // SELECT SaltzaileaId, COUNT(Izena)  FROM Bezeroa  GROUP BY Izena
+                    .Include("Saltzailea") // Beste taula bat gehitu
+                    .GroupBy(b => b.Saltzailea.Izena)
+                    .ToDictionary(g => g.Key, g => g.Count()); // Inner join
                 if (bezeroaData != null)
                 {
                     if (bezeroaData.Count > 0)
                     {
                         chart1.DataSource = bezeroaData;
-                        chart1.Series[0].YValueMembers = "Value";
-                        chart1.Series[0].XValueMember = "Key";
+                        chart1.Series[0].YValueMembers = "Value"; // Y ardatza
+                        chart1.Series[0].XValueMember = "Key"; // X ardatza
                         chart1.DataBind();
                     }
                 }
             }
-
         }
     }
 }
